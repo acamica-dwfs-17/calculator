@@ -52,7 +52,7 @@ function Operacion(numeroParseado1, numeroParseado2, oper){
       resultadoParcial = numeroParseado1 - numeroParseado2;
       break;
     case '*':
-      resultadoParcial = numeroParseado1 * numeroParseado2;
+      resultadoParcial = numeroParseado1 - numeroParseado2;
       break;
     case '/':
       resultadoParcial = numeroParseado1 / numeroParseado2;
