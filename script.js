@@ -5,7 +5,9 @@ var operacion = '';
 
 
 function setearOperador(operador) {
-  hacerOperacion();
+  resultado = hacerOperacion(acumulador1, acumulador2, operador);
+  if (resultado)
+    actualizarDisplay(resultado);
 
   if (operador && resultado) {
     acumulador1 = resultado;
@@ -30,28 +32,34 @@ function actualizarDisplay(nuevoValor) {
   display.innerText = nuevoValor;
 }
 
-function hacerOperacion() {
-  if (acumulador1 && acumulador2) {
-    var numeroParseado1 = parseFloat(acumulador1);
-    var numeroParseado2 = parseFloat(acumulador2);
-
-    switch (operacion) {
-      case '+':
-        resultado = numeroParseado1 + numeroParseado2;
-        break;
-      case '-':
-        resultado = numeroParseado1 - numeroParseado2;
-        break;
-      case '*':
-        resultado = numeroParseado1 * numeroParseado2;
-        break;
-      case '/':
-        resultado = numeroParseado1 / numeroParseado2;
-        break;
-    }
-
-    actualizarDisplay(resultado);
+function hacerOperacion(acu1, acu2, oper) {
+  let resultadoParcial;
+  if (acu1 && acu2) {
+    var numeroParseado1 = parseFloat(acu1);
+    var numeroParseado2 = parseFloat(acu2);
+    resultadoParcial = Operacion(numeroParseado1, numeroParseado2, oper)
   }
+  return resultadoParcial
+}
+
+function Operacion(numeroParseado1, numeroParseado2, oper){
+  let resultadoParcial
+  switch (oper) {
+    case '+':
+      resultadoParcial = numeroParseado1 + numeroParseado2;
+      break;
+    case '-':
+      resultadoParcial = numeroParseado1 - numeroParseado2;
+      break;
+    case '*':
+      resultadoParcial = numeroParseado1 * numeroParseado2;
+      break;
+    case '/':
+      resultadoParcial = numeroParseado1 / numeroParseado2;
+      break;
+  }
+
+  return resultadoParcial
 }
 
 function resetear() {
