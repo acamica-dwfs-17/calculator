@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+    <script src="script.js"></script>
+    
+  </head>
+  <body>
+    <h1>JavaScript Calculator</h1>
+    <p class="warning">Don't divide by zero</p>
+
+    <div id="calculator" class="calculator">
+      <button id="clear" class="clear">C</button>
+
+      <div id="viewer" class="viewer">0</div>
+      <!-- Se le envia this como parámetro de la función -->
+      <button class="num" data-num="7">7</button>
+      <button class="num" data-num="8">8</button>
+      <button class="num" data-num="9">9</button>
+      <button data-ops="plus" class="ops">+</button>
+
+      <button class="num" data-num="4">4</button>
+      <button class="num" data-num="5">5</button>
+      <button class="num" data-num="6">6</button>
+      <button data-ops="minus" class="ops">-</button>
+
+      <button class="num" data-num="1">1</button>
+      <button class="num" data-num="2">2</button>
+      <button class="num" data-num="3">3</button>
+      <button data-ops="times" class="ops">*</button>
+
+      <button class="num" data-num="0">0</button>
+      <button class="num" data-num=".">.</button>
+      <button id="equals" class="equals" data-result="">=</button>
+      <button data-ops="divided by" class="ops">/</button>
+    </div>
+
+    <button id="reset" class="reset">Reset Universe?</button>
+    
+  </body>
+  <script>
+      var numeros = document.getElementsByClassName('num');
+      var operadores = document.getElementsByClassName('ops');
+      var igual = document.getElementById('equals');
+      var clear = document.getElementById('clear');      
+
+      /*
+        Se asigna un "oyente" que estará atento a que se haga clic sobre el botón de "igual", en 
+        caso de que suceda se ejecuta la funcion "hacerOperacion"
+      */
+      igual.addEventListener('click', hacerOperacion);
+
+      /*
+        Se asigna un "oyente" que estará atento a que se haga clic sobre el botón de "clear", en 
+        caso de que suceda se ejecuta la funcion "resetear"
+      */
+      clear.addEventListener('click', resetear);      
+
+      /*
+        Se itera en la coleccion de numeros (botones con clase "num") para asignarle el "oyente"
+        de "clic" UNO por UNO
+      */
+      for (var i = 0; i < numeros.length - 1; i++) {
+        numeros[i].addEventListener('click', function(evento) {
+          /*
+            Por defecto al realizarse un evento en javascript, se envia por parámetro el mismo "Evento",
+            el que dentro de todas sus propiedades tiene definido el elemento "objetivo" (target)
+            que indica el elemento en el cual se realizo la acción
+          */
+          console.log(evento);
+          //Obtiene el target (elemento en el cual se ejecutó la acción)
+          let elemento = evento.target;
+          console.log(elemento);
+
+          setearValor(elemento.innerText)
+        });
+      } 
+
+      for (let i = 0; i < operadores.length; i++) {
+        operadores[i].addEventListener('click', function(evento) {
+          /*
+            Por defecto al realizarse un evento en javascript, se envia por parámetro el mismo "Evento",
+            el que dentro de todas sus propiedades tiene definido el elemento "objetivo" (target)
+            que indica el elemento en el cual se realizo la acción
+          */
+          console.log(evento);
+          let elemento = this;
+          //Obtiene el target (elemento en el cual se ejecutó la acción)
+          console.log(elemento);
+
+          setearOperador(elemento.innerHTML);
+        });
+      }      
+  </script>  
+</html>

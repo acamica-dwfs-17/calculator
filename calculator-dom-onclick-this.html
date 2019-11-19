@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+    <script src="script.js"></script>
+    <script>
+        /*
+          Al enviar this, se obtiene el mismo elemento html 
+          del DOM en el cual se ejecuto el evento de click. 
+          Es decir el botón en el cual se hizo click.
+        */  
+        function obtenerValor(elemento) {
+            console.log(elemento);
+            var numeroPresionado = elemento.innerText;
+            setearValor(numeroPresionado);
+        }
+  
+        function obtenerOperador(elemento) {
+            console.log(elemento);
+            var operadorPresionado = elemento.innerText;
+            setearOperador(operadorPresionado);
+        }      
+      </script>
+  </head>
+  <body>
+    <h1>JavaScript Calculator</h1>
+    <p class="warning">Don't divide by zero</p>
+
+    <div id="calculator" class="calculator">
+      <button id="clear" class="clear">C</button>
+
+      <div id="viewer" class="viewer">0</div>
+      <!-- Se le envia this como parámetro de la función -->
+      <button class="num" data-num="7">7</button>
+      <button class="num" data-num="8">8</button>
+      <button class="num" data-num="9">9</button>
+      <button data-ops="plus" class="ops">+</button>
+
+      <button class="num" data-num="4">4</button>
+      <button class="num" data-num="5">5</button>
+      <button class="num" data-num="6">6</button>
+      <button data-ops="minus" class="ops">-</button>
+
+      <button class="num" data-num="1">1</button>
+      <button class="num" data-num="2">2</button>
+      <button class="num" data-num="3">3</button>
+      <button data-ops="times" class="ops">*</button>
+
+      <button class="num" data-num="0">0</button>
+      <button class="num" data-num=".">.</button>
+      <button id="equals" class="equals" data-result="">=</button>
+      <button data-ops="divided by" class="ops">/</button>
+    </div>
+
+    <button id="reset" class="reset">Reset Universe?</button>
+    
+  </body>
+  <script>
+      //Se obtienen todos los elementos HTML (botones) que tienen la clase "nun"
+      var numeros = document.getElementsByClassName('num');
+      //Se obtienen todos los elementos HTML (botones) que tienen la clase "nun"
+      var operadores = document.getElementsByClassName('ops');
+      //Se obtiene el botón con el atributo id "equals"
+      var igual = document.getElementById('equals');
+      //Se obtiene el botón con el atributo id "clear"
+      var clear = document.getElementById('clear');      
+
+      //Se asigna el callback o función que se ejecutará cuando se haga click en el botón de igual
+      igual.onclick = hacerOperacion;
+      //Se asigna el callback o función que se ejecutará cuando se haga click en el botón de clear      
+      clear.onclick = resetear;      
+      /*
+        Se itera en la coleccion de numeros (botones con clase "num") para asignarle el evento
+        de "clic" UNO por UNO
+      */
+      for (var i = 0; i < numeros.length - 1; i++) {
+        numeros[i].onclick = function() {
+          /*
+            Siempre al acceder dentro de un evento que es ejecutado sobre un elemento, en este caso
+            el botón de los operadores que se apretó, se hace referencia a "this", que quiere
+            decir "este elemento"
+          */
+          let elemento = this;
+          console.log(elemento);
+          setearValor(elemento.innerText)
+        };
+      } 
+
+      /*
+        Se itera en la coleccion de operadores (botones con clase "opt") para asignarle el evento
+        de "clic" UNO por UNO
+      */
+      for (let i = 0; i < operadores.length; i++) {
+        operadores[i].onclick = function() {
+          /*
+            Siempre al acceder dentro de un evento que es ejecutado sobre un elemento, en este caso
+            el botón de los operadores que se apretó, se hace referencia a "this", que quiere
+            decir "este elemento"
+          */
+          let elemento = this;
+          console.log(elemento);
+          setearOperador(elemento.innerHTML);
+        };
+      }      
+  </script>  
+</html>
