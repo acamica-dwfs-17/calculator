@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+    <script src="script.js"></script>
+    
+  </head>
+  <body>
+    <h1>JavaScript Calculator</h1>
+    <p class="warning">Don't divide by zero</p>
+
+    <div id="calculator" class="calculator">
+      <button id="clear" class="clear">C</button>
+
+      <div id="viewer" class="viewer">0</div>
+      <!-- Se le envia this como parámetro de la función -->
+      <button class="num" data-num="7">7</button>
+      <button class="num" data-num="8">8</button>
+      <button class="num" data-num="9">9</button>
+      <button data-ops="plus" class="ops">+</button>
+
+      <button class="num" data-num="4">4</button>
+      <button class="num" data-num="5">5</button>
+      <button class="num" data-num="6">6</button>
+      <button data-ops="minus" class="ops">-</button>
+
+      <button class="num" data-num="1">1</button>
+      <button class="num" data-num="2">2</button>
+      <button class="num" data-num="3">3</button>
+      <button data-ops="times" class="ops">*</button>
+
+      <button class="num" data-num="0">0</button>
+      <button class="num" data-num=".">.</button>
+      <button id="equals" class="equals" data-result="">=</button>
+      <button data-ops="divided by" class="ops">/</button>
+    </div>
+
+    <button id="reset" class="reset">Reset Universe?</button>
+    
+  </body>
+  <script>
+      var numeros = document.getElementsByClassName('num');
+      var operadores = document.getElementsByClassName('ops');
+      var igual = document.getElementById('equals');
+      var clear = document.getElementById('clear');      
+
+      /*Se asigna al elemento la función a ejecutar cuando se hace click en el mismo*/
+      igual.onclick = hacerOperacion;
+      /*Se asigna al elemento la función a ejecutar cuando se hace click en el mismo*/
+      clear.onclick = resetear;      
+
+      /*
+        Se itera en la coleccion de numeros (botones con clase "num") para asignarle el evento
+        de "clic" UNO por UNO
+      */
+      for (let i = 0; i < numeros.length; i++) {
+        numeros[i].onclick = function() {
+          //Toma del elemento itereado operadores[i] el texto que tiene "innerHTML"
+          setearValor(numeros[i].innerHTML);
+        };
+      }
+
+      /*
+        Se itera en la coleccion de operadores (botones con clase "opt") para asignarle el evento
+        de "clic" UNO por UNO
+      */      
+      for (let i = 0; i < operadores.length; i++) {
+        operadores[i].onclick = function() {
+          //Toma del elemento itereado operadores[i] el texto que tiene "innerHTML"
+          setearOperador(operadores[i].innerHTML);
+        };
+      }      
+  </script>
+  <script src="testing.js"></script>
+
+</html>

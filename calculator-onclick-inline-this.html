@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+    <script src="script.js"></script>
+    <script>
+      /*
+        Al enviar this, se obtiene el mismo elemento html 
+        del DOM en el cual se ejecuto el evento de click. 
+        Es decir el botón en el cual se hizo click.
+      */  
+      function obtenerValor(elemento) {
+          console.log(elemento);
+          var numeroPresionado = elemento.innerText;
+          setearValor(numeroPresionado);
+      }
+
+      function obtenerOperador(elemento) {
+          console.log(elemento);
+          var operadorPresionado = elemento.innerText;
+          setearOperador(operadorPresionado);
+      }      
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript Calculator</h1>
+    <p class="warning">Don't divide by zero</p>
+
+    <div id="calculator" class="calculator">
+      <button id="clear" class="clear" onclick="resetear()">C</button>
+
+      <div id="viewer" class="viewer">0</div>
+      <!-- Se le envia this como parámetro de la función -->
+      <button class="num" data-num="7" onclick="obtenerValor(this)">7</button>
+      <button class="num" data-num="8" onclick="obtenerValor(this)">8</button>
+      <button class="num" data-num="9" onclick="obtenerValor(this)">9</button>
+      <button data-ops="plus" class="ops" onclick="obtenerOperador(this)">+</button>
+
+      <button class="num" data-num="4" onclick="obtenerValor(this)">4</button>
+      <button class="num" data-num="5" onclick="obtenerValor(this)">5</button>
+      <button class="num" data-num="6" onclick="obtenerValor(this)">6</button>
+      <button data-ops="minus" class="ops" onclick="obtenerOperador(this)">-</button>
+
+      <button class="num" data-num="1" onclick="obtenerValor(this)">1</button>
+      <button class="num" data-num="2" onclick="obtenerValor(this)">2</button>
+      <button class="num" data-num="3" onclick="obtenerValor(this)">3</button>
+      <button data-ops="times" class="ops" onclick="obtenerOperador(this)">*</button>
+
+      <button class="num" data-num="0" onclick="obtenerValor(this)">0</button>
+      <button class="num" data-num="."  onclick="obtenerValor(this)">.</button>
+      <button id="equals" class="equals" data-result="" onclick="hacerOperacion()">=</button>
+      <button data-ops="divided by" class="ops" onclick="obtenerOperador(this)">/</button>
+    </div>
+
+    <button id="reset" class="reset" onclick="resetear()">Reset Universe?</button>
+    
+  </body>
+</html>
